@@ -21,7 +21,9 @@ export class ListPage implements OnInit {
     'bluetooth',
     'build'
   ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
+  //public items: Array<{ title: string; note: string; icon: string }> = [];
+  public items: string[]  = [];
+
   constructor(private fooSvc: SharedDataService, private swapiSvc: SwapiService) {
   }
 
@@ -29,6 +31,8 @@ export class ListPage implements OnInit {
     this.swapiSvc.getPlanets().subscribe(
       data => {
         console.log(data);
+
+        this.items = (<any> data).results.map(x => x.name);
       }
       , error => console.log(error)
     );
